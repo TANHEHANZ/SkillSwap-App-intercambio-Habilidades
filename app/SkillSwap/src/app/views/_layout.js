@@ -1,13 +1,16 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import NavBottom from "../../components/navBottom";
-import { Slot } from "expo-router";
+import { Slot, router } from "expo-router";
 
 const HomeLayaut = () => {
   return (
-    <View>
+    <View  style={{flex:1 }}>
       <Text>HomeLayaut</Text>
-      <View>
+      <TouchableOpacity onPress={() => router.replace("login")}>
+        <Text>volver</Text>
+      </TouchableOpacity>
+      <View  style={{flex:1 }}>
         <Slot />
       </View>
       <NavBottom />
@@ -16,3 +19,4 @@ const HomeLayaut = () => {
 };
 
 export default HomeLayaut;
+

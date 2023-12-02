@@ -8,6 +8,7 @@ export const loginstyle = StyleSheet.create({
     flex: 1,
     ...dataStyleLogin.comunFlex,
     position: "relative",
+    height: 500,
   },
   containerdark: {
     backgroundColor: colors.black,
@@ -22,7 +23,6 @@ export const loginstyle = StyleSheet.create({
     height: 20,
     backgroundColor: colors.secundary100,
     borderRadius: 100,
-    // position: "absolute",
   },
 });
 
@@ -34,7 +34,7 @@ export const fondo = StyleSheet.create({
   backgroundDatadark: {
     borderColor: colors.secundary100,
     ...backgraundElement,
-    zIndex: -100,
+    zIndex: -100, 
   },
   bola: {
     position: "absolute",
@@ -48,22 +48,30 @@ export const fondo = StyleSheet.create({
   titulo: {
     color: colors.secundary,
     fontSize: 30,
+    flexDirection: "row",
   },
   titulodark: {
-    color: colors.secundary200,
+    color: colors.primary,
     fontSize: 30,
+    flexDirection: "row",
   },
   texto: {
     color: colors.secundary,
     fontSize: 14,
+    flexDirection: "row",
+    ...dataStyleLogin.comunFlex,
+    gap: 5,
   },
   textodarck: {
-    color: colors.secundary200,
+    color: colors.primary,
     fontSize: 14,
+    flexDirection: "row",
+    ...dataStyleLogin.comunFlex,
+    gap: 8,
   },
   cajatexto: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.secundary,
+    borderWidth: 1,
+    borderColor: colors.secundary,
     borderRadius: 20,
     width: 300,
     zIndex: 10,
@@ -71,7 +79,7 @@ export const fondo = StyleSheet.create({
   },
   cajatextodark: {
     borderBottomWidth: 1,
-    borderBottomColor: colors.secundary100,
+    borderBottomColor: colors.primary100,
     borderRadius: 20,
     width: 300,
     zIndex: 10,
@@ -81,7 +89,7 @@ export const fondo = StyleSheet.create({
 
 export const comunButton = StyleSheet.create({
   boton: {
-    borderColor: colors.secundary200,
+    backgroundColor: colors.secundary,
     ...dataStyleLogin.comunFlex,
     ...button.data,
   },

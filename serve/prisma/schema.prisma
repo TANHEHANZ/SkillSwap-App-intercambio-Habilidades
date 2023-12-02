@@ -1,49 +1,40 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model Usuarios {
-  id                         Int         @id @default(autoincrement())
-  nombre                     String      @unique
-  correo                     String      @unique
-  password                   String
-  habilidadesOfrecer         String
-  hablilidadesDeseadas       String
-  estado                     String      @default("solicitante")
-  solicitudesComoSolicitante Solicitud[] @relation("solicitante")
-  solicitudesComoReceptor    Solicitud[] @relation("receptor")
+model Usuario {
+  id                Int         @id @default(autoincrement())
+  nombre            String      @unique
+  correo            String      @unique
+  password          String
+  habilidadesId     Int
+  asiganarHabilidad Habilidad   @relation(fields: [habilidadesId], references: [id])
+  solicitudes       Solicitud[]
 }
 
 model Solicitud {
-  id               Int      @id @default(autoincrement())
-  solicitante      Usuarios @relation("solicitante", fields: [solicitudUsuario], references: [id])
-  receptor         Usuarios @relation("receptor", fields: [receptorUsuario], references: [id])
-  solicitudUsuario Int
-  receptorUsuario  Int
-
-  estado String
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  solicitudUser Usuario  @relation(fields: [userId], references: [id])
+  fecha         DateTime
 }
 
-model Calificaiones {
-  id                 Int    @id @default(autoincrement())
-  usuarioCalificador Int
-  usuarioCalificado  Int
-  puntuacion         Int
-  comentarios        String
+model Trabajos {
+  id        Int     @id @default(autoincrement())
+  imagen    String?
+  recurso   String?
+  descricao String
+  estado    String  @default("false")
 }
 
-model Mensajes {
-  id               Int      @id @default(autoincrement())
-  usuarioRemitente Int
-  usuarioDestino   Int
-  contendido       String
-  fecha_hora       DateTime
+model Habilidad {
+  id        Int       @id @default(autoincrement())
+  habilidad String
+  estado    String    @default("false")
+  usuarios  Usuario[]
 }
