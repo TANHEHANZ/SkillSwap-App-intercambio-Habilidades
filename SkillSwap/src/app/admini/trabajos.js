@@ -6,12 +6,14 @@ import { peticiongetdelete } from "../../services/getRequest";
 import { colors } from "../../style/style";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FormTrabajos from "../../components/formTrabajos";
+import useUserStore from "../../context/userContext";
 
 const trabajos = () => {
   const [data, setData] = useState("");
   const [ediatando, setEdiatando] = useState("");
 
-  const userData = 1;
+  const user = useUserStore((state) => state.user);
+  const userData = user.id;
   const fetchData = async () => {
     try {
       const result = await peticiongetdelete(`trabajos/` + userData);

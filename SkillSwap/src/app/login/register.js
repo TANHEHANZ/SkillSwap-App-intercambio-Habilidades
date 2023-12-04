@@ -67,7 +67,7 @@ const Register = () => {
         ></TextInput>
 
         <TouchableOpacity
-          onPress={() => redireccionar("views")}
+          onPress={() => redireccionar("client/home")}
           style={comunButton.boton}
         >
           <View style={titulodarkdata}>
@@ -80,11 +80,11 @@ const Register = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => redireccionar("login/register")}
+          onPress={() => redireccionar("login")}
           style={comunButton.boton}
         >
           <View style={titulodarkdata}>
-            <Text style={{ color: "#fff" }}> Registrate</Text>
+            <Text style={{ color: "#fff" }}> Volver</Text>
             <FontAwesome
               name="user-plus"
               size={15}

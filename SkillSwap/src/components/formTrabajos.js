@@ -4,9 +4,13 @@ import { colors } from "../style/style";
 import { fondo } from "../style/loginStyle";
 import { peticionPostPut } from "../services/getRequest";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import useUserStore from "../context/userContext";
 
 const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
-  const userData = 1;
+  const user = useUserStore((state) => state.user);
+  const userData = user.id;
+
+  console.log(userData);
   const [trabajos, setTrabajos] = useState({
     imagen: "",
     recurso: "",

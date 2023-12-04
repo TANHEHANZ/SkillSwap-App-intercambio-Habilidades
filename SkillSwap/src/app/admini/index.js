@@ -1,9 +1,24 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { trabajos } from "../../style/dashStyle";
+import useUserStore from "../../context/userContext";
+import { peticiongetdelete } from "../../services/getRequest";
 
 const Index = () => {
+  const user = useUserStore((state) => state.user);
+  console.log(user);
+  const [data, setData] = useState("");
+
+  const fetchData = async () => {
+    try {
+      const result = await peticiongetdelete(`trabajos/` + userData);
+      setData(result);
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+    }
+  };
+
   return (
     <View
       style={{ flex: 1, flexDirection: "column", gap: 20, paddingVertical: 30 }}

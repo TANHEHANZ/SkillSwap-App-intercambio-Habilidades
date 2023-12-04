@@ -12,6 +12,7 @@ const solicitud = require("./controllers/solicitud");
 const trabajos = require("./controllers/trbajos");
 const habilidades = require("./controllers/habilidad");
 const comentarios = require("./controllers/comentarios");
+const login = require("./controllers/login");
 app.use(
   bodyParser.urlencoded({
     extended: false,
@@ -24,6 +25,7 @@ app.use(solicitud);
 app.use(trabajos);
 app.use(habilidades);
 app.use(comentarios);
+app.use(login);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
