@@ -7,10 +7,11 @@ import { button } from "../../style/style";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const Login = () => {
-  const redireccionar = () => {
-    router.replace("/views");
+  const redireccionar = (ir) => {
+    console.log(ir);
+    router.replace("/" + ir);
   };
-  const [darkmode, setDarkmode] = useState(true);
+  const [darkmode, setDarkmode] = useState(false);
 
   const combioStyle = () => {
     setDarkmode(!darkmode);
@@ -56,11 +57,10 @@ const Login = () => {
         <TextInput style={cajatextoData} value=""></TextInput>
         <TextInput style={cajatextoData} value=""></TextInput>
         <TouchableOpacity
-          onPress={() => redireccionar()}
+          onPress={() => redireccionar("admini")}
           style={comunButton.boton}
         >
           <View style={titulodarkdata}>
-          
             <Text style={{ color: "#fff" }}> Iniciar</Text>
             <FontAwesome
               name="sign-in"
@@ -70,7 +70,7 @@ const Login = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => redireccionar()}
+          onPress={() => redireccionar("login/register")}
           style={comunButton.boton}
         >
           <View style={titulodarkdata}>

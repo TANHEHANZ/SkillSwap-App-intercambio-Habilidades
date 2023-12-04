@@ -10,30 +10,18 @@ app.get("/user", async (req, res) => {
 });
 app.post("/user", async (req, res) => {
   try {
-    const existingUsername = await prisma.usuario.findUnique({
-      where: {
-        nombre: req.body.nombre,
-      },
-    });
-
     const existingEmail = await prisma.usuario.findUnique({
       where: {
         correo: req.body.correo,
       },
     });
-
-    if (existingUsername) {
-      return res.status(400).json({
-        message: "El nombre de usuario ya está en uso",
-      });
-    }
-
     if (existingEmail) {
       return res.status(400).json({
         message: "El correo electrónico ya está en uso",
       });
     }
-    if (!existingUsername || !existingEmail) {
+
+    if (!existingEmail) {
       const usuario = await prisma.usuario.create({
         data: req.body,
       });

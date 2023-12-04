@@ -8,6 +8,15 @@ app.get("/habilidad", async (req, res) => {
   res.json(habilidad);
 });
 
+app.get("/habilidades", async (req, res) => {
+  const habilidad = await prisma.habilidad.findMany({
+    where: {
+      estado: "true",
+    },
+  });
+  res.json(habilidad);
+});
+
 app.post("/habilidad", async (req, res) => {
   const habilidad = await prisma.habilidad.create({
     data: req.body,

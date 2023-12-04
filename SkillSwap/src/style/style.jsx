@@ -6,6 +6,7 @@ export const colors = {
   secundary: "rgb(105,0,235)",
   secundary100: "rgb(80, 3, 173)",
   secundary200: "rgb(50, 1, 109)",
+  secundary300: "rgb(181, 181, 243)",
   blue100: "#EBF1FD",
 };
 

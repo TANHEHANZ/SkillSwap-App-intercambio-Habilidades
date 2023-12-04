@@ -7,6 +7,14 @@ app.get("/solicitud", async (req, res) => {
   const soli = await prisma.solicitud.findMany({});
   res.json(soli);
 });
+app.get("/solicitud/:id", async (req, res) => {
+  id = parseInt(req.params.id);
+  const soli = await prisma.solicitud.findMany({
+    where: { userId: id },
+  });
+  res.json(soli);
+});
+
 app.post("/solicitud", async (req, res) => {
   const soli = await prisma.solicitud.create({
     data: req.body,

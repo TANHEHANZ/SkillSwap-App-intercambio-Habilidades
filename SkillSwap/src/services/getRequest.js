@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { http } from "./https";
 
-const complementUrl = "localhost//8000";
-
-export const peticionPostPut = async (url, metodo,contenido) => {
-  const responde = await fetch(complementUrl + url, {
+export const peticionPostPut = async (url,contenido,metodo) => {
+  const responde = await fetch(http + url, {
     method: metodo ? "PUT" : "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +17,7 @@ export const peticionPostPut = async (url, metodo,contenido) => {
 };
 
 export const peticiongetdelete = async (url, metodo) => {
-  const responde = await fetch(url, {
+  const responde = await fetch(http+url, {
     method: metodo ? "DELETE" : "GET",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
   });
@@ -29,13 +27,3 @@ export const peticiongetdelete = async (url, metodo) => {
   }
   return null;
 };
-
-// const [data, setData] = useState("");
-// const fechedData = async () => {
-//   try {
-//     const result = await peticionPostPut("espera url");
-//     setData(result);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

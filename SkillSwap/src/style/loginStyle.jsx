@@ -5,17 +5,15 @@ export const loginstyle = StyleSheet.create({
   container: {
     width: "100%",
     backgroundColor: colors.primary,
-    flex: 1,
     ...dataStyleLogin.comunFlex,
     position: "relative",
-    height: 500,
+    height: 900,
   },
   containerdark: {
     backgroundColor: colors.black,
-    flex: 1,
     ...dataStyleLogin.comunFlex,
     position: "relative",
-    height: 100,
+    height: 900,
   },
 
   buttonStyle: {
