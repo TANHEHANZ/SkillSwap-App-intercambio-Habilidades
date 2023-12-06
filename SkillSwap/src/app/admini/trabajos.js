@@ -71,8 +71,18 @@ const trabajos = () => {
                 />
               </TouchableOpacity>
               <View style={{ flexDirection: "column", gap: 10 }}>
-                <Text>acciones</Text>
-
+                <Text>Acciones</Text>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL(item.recurso)}
+                  style={{
+                    ...fondo.cajatexto,
+                    width: 100,
+                    justifyContent: "center",
+                    flexDirection: "row",
+                  }}
+                >
+                  <Text>Ver Recurso</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => deleteData(item.id)}
                   style={{

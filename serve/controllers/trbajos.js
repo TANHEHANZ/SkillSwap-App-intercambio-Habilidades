@@ -5,7 +5,11 @@ const app = express();
 const prisama = new PrismaClient();
 
 app.get("/trabajos", async (req, res) => {
-  const trabajos = await prisama.trabajos.findMany({});
+  const trabajos = await prisama.trabajos.findMany({
+    include: {
+      usuerTabajo: true,
+    },
+  });
   res.json(trabajos);
 });
 app.get("/trabajos/:id", async (req, res) => {

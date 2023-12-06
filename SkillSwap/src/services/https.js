@@ -1,4 +1,5 @@
 // export const http = "https://munayki-serve.vercel.app/"
 // export const http = "https://servermunaikidata.vercel.app/"
-export const http = "http://192.168.0.16:3000/";
+export const http =
+  "https://skill-swap-app-intercambio-habilidades.vercel.app/";
 // VITE_BACKEND_URL="https://servermunaikidata.vercel.app"
