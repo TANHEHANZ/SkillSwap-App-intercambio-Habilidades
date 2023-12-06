@@ -8,10 +8,16 @@ app.get("/trabajos", async (req, res) => {
   const trabajos = await prisama.trabajos.findMany({
     include: {
       usuerTabajo: true,
+      Comentarios: {
+        include: {
+          usuarioComentando: true,
+        },
+      },
     },
   });
   res.json(trabajos);
 });
+
 app.get("/trabajos/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   const trabajos = await prisama.trabajos.findMany({

@@ -25,9 +25,11 @@ export const buttonCrud = StyleSheet.create({
 
 export const trabajos = StyleSheet.create({
   cars: {
-    width: 100,
-    backgroundColor: "#0008",
+    width: 160,
+    backgroundColor: "#060b4b86",
     marginHorizontal: 10,
     borderRadius: 10,
+    ...dataStyleLogin.comunFlex,
+
   },
 });

@@ -5,7 +5,7 @@ import { fondo } from "../style/loginStyle";
 import { peticionPostPut } from "../services/getRequest";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import useUserStore from "../context/userContext";
-
+import { CheckBox } from "react-native-elements";
 const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
   const user = useUserStore((state) => state.user);
   const userData = user.id;
@@ -15,7 +15,7 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
     imagen: "",
     recurso: "",
     descripcion: "",
-    usuarioId: +userData,
+    estado: "true",
   });
 
   useEffect(() => {
@@ -25,12 +25,14 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
         imagen: ediatando.imagen || "",
         recurso: ediatando.recurso || "",
         descripcion: ediatando.descripcion || "",
-        usuarioId: +ediatando.usuarioId || userData,
+        estado: ediatando.estado || "",
+        usuarioId: +ediatando.usuarioId || +userData,
       });
     } else {
       setTrabajos({
         imagen: "",
         recurso: "",
+        estado: "",
         descripcion: "",
         usuarioId: +userData,
       });
@@ -38,11 +40,13 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
   }, [ediatando]);
 
   const handleSend = async () => {
+    console.log(trabajos);
     const res = await peticionPostPut("trabajos", {
       imagen: trabajos.imagen,
       recurso: trabajos.recurso,
       descripcion: trabajos.descripcion,
-      usuarioId: trabajos.usuarioId,
+      usuarioId: +userData,
+      estado: trabajos.estado || "false",
     });
     console.log(res);
     if (res) {
@@ -51,6 +55,7 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
       setTrabajos({
         imagen: "",
         recurso: "",
+        estado: "",
         descripcion: "",
       });
     }
@@ -63,6 +68,7 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
         imagen: trabajos.imagen,
         recurso: trabajos.recurso,
         descripcion: trabajos.descripcion,
+        estado: trabajos.estado,
       },
       "PUT"
     );
@@ -74,6 +80,7 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
         imagen: "",
         recurso: "",
         descripcion: "",
+        estado: "",
       });
     }
   };
@@ -112,6 +119,30 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
           setTrabajos((old) => ({ ...old, descripcion: text }))
         }
       ></TextInput>
+      <View
+        style={{
+          width: "12%",
+          backgroundColor: colors.secundary100,
+          color: "#fff",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          alignSelf: "flex-start",
+          position: "absolute",
+          top:0,
+        }}
+      >
+        <Text style={{ color: "#fff" }}>Visible</Text>
+        <CheckBox
+          checked={trabajos.estado === "true"}
+          onPress={() =>
+            setTrabajos((old) => ({
+              ...old,
+              estado: old.estado === "true" ? "false" : "true",
+            }))
+          }
+        />
+      </View>
 
       <TouchableOpacity
         style={{

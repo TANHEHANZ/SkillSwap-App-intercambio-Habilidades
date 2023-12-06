@@ -16,16 +16,14 @@ const Login = () => {
 
   const updateUser = useUserStore((state) => state.updateUser);
 
-  
   const handleSend = async () => {
     const res = await peticionPostPut("login", {
       correo: dataLogin.correo,
       password: dataLogin.password,
     });
     res && res.message === "Inicio de sesion correcto"
-      ? (router.replace("/admini"), alert("Bienvenido"))
-      : alert(res.message),
-      updateUser(res.data);
+      ? (updateUser(res.data),router.replace("/admini"), alert("Bienvenido"))
+      : alert(res.message);
   };
   const redireccionar = (ir) => {
     console.log(ir);

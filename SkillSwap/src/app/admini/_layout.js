@@ -16,7 +16,7 @@ const HomeLayautDash = () => {
           alignItems: "center",
         }}
       >
-        <Text style={{ color: "#fff" }}>Bienvenido</Text>
+        <Text style={{ color: "#fff" }}>Skill+Swap</Text>
         <TouchableOpacity onPress={() => router.replace("login")}>
           <Text
             style={{

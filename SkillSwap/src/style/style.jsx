@@ -3,9 +3,9 @@ export const colors = {
   primary: "#fff",
   primary100: "#ffffffc0",
   black: "#0D0E1A",
-  secundary: "rgb(105,0,235)",
-  secundary100: "rgb(80, 3, 173)",
-  secundary200: "rgb(50, 1, 109)",
+  secundary: "rgb(6, 64, 150)",
+  secundary100: "rgb(0, 6, 92)",
+  secundary200: "rgb(15, 11, 78)",
   secundary300: "rgb(181, 181, 243)",
   blue100: "#EBF1FD",
 };

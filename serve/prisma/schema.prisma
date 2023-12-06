@@ -8,10 +8,10 @@ datasource db {
 }
 
 model Usuario {
-  id       Int    @id @default(autoincrement())
-  nombre   String
-  correo   String @unique
-  password String
+  id          Int           @id @default(autoincrement())
+  nombre      String
+  correo      String        @unique
+  password    String
   Comentarios Comentarios[]
   solicitudes Solicitud[]
   Trabajos    Trabajos[]
@@ -28,13 +28,14 @@ model Solicitud {
 }
 
 model Trabajos {
-  id          Int     @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   imagen      String?
   recurso     String?
   descripcion String
-  estado      String  @default("false")
+  estado      String        @default("false")
   usuarioId   Int
-  usuerTabajo Usuario @relation(fields: [usuarioId], references: [id])
+  usuerTabajo Usuario       @relation(fields: [usuarioId], references: [id])
+  Comentarios Comentarios[]
 }
 
 model Comentarios {
@@ -43,6 +44,8 @@ model Comentarios {
   fecha             DateTime
   usuarioId         Int
   usuarioComentando Usuario  @relation(fields: [usuarioId], references: [id])
+  trabajoId         Int
+  trabajoComentado  Trabajos @relation(fields: [trabajoId], references: [id])
 }
 
 model Habilidad {

@@ -1,6 +1,8 @@
-import { View, Text, Image, FlatList } from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { peticiongetdelete } from "../../services/getRequest";
+import { fondo } from "../../style/loginStyle";
+import { colors } from "../../style/style";
 
 const Home = () => {
   const [data, setData] = useState("");
@@ -12,7 +14,7 @@ const Home = () => {
       console.error("Error al obtener datos:", error);
     }
   };
-  useEffect(() => {
+  useEffect( ()  => {
     fetchData();
   }, []);
   return (
@@ -20,21 +22,51 @@ const Home = () => {
       <FlatList
         style={{
           flexDirection: "row",
-          gap: 5,
           width: 400,
           flexWrap: "wrap",
-          padding: 20,
         }}
         data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View>
-            <Image
-              source={{ uri: item.imagen }}
-              style={{ width: 140, height: 200 }}
-            />
-            <Text>{item.usuarioId}</Text>
-          </View>
+          <>
+            {item.estado === "true" ? (
+              <View
+                style={{
+                  width: 300,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={{ uri: item.imagen }}
+                  style={{ width: 100, height: 150 }}
+                />
+                <View style={{ flexDirection: "column", gap: 10 }}>
+                  {item.usuerTabajo && (
+                    <Text style={{ fontWeight: 900, color: colors.secundary }}>
+                      {item.usuerTabajo.nombre}
+                    </Text>
+                  )}
+                  <Text style={{ width: 200 }}>{item.descripcion}</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL(item.recurso)}
+                  style={{
+                    ...fondo.cajatexto,
+                    width: 100,
+                    justifyContent: "center",
+                    flexDirection: "row",
+                  }}
+                >
+                  <Text>Ver Recurso</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <></>
+            )}
+          </>
         )}
       />
     </View>

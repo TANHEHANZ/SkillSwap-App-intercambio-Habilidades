@@ -7,9 +7,29 @@ import { comunButton, fondo, loginstyle } from "../../style/loginStyle";
 import { button } from "../../style/style";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Picker } from "@react-native-picker/picker";
+import { peticionPostPut } from "../../services/getRequest";
 
 const Register = () => {
-  const [selectedValue, setSelectedValue] = useState("zxczxczxc");
+  const [data, setData] = useState({
+    nombre: "",
+    password: "",
+    correo: "",
+    confirmacion: "",
+  });
+
+  const requesData = async () => {
+    if (data.password === data.confirmacion) {
+      const registrar = await peticionPostPut("/user", {
+        nombre: data.nombre,
+        password: data.password,
+        correo: data.correo,
+      });
+      console.log(registrar);
+      registrar.message==="Usuario Creado" ? (router.replace("/"), alert(registrar.message)) : alert(registrar.message);
+    } else {
+      alert("las contraseñas no considen");
+    }
+  };
 
   const redireccionar = (ir) => {
     console.log(ir);
@@ -58,20 +78,41 @@ const Register = () => {
           marginVertical: 50,
         }}
       >
-        <TextInput style={cajatextoData} value=""></TextInput>
-        <TextInput style={cajatextoData} value=""></TextInput>
-        <TextInput style={cajatextoData} value=""></TextInput>
         <TextInput
-          style={{ ...cajatextoData, height: 150 }}
-          value=""
+          style={cajatextoData}
+          value={data.nombre}
+          onChangeText={(text) => setData((old) => ({ ...old, nombre: text }))}
+          placeholder="nombre"
+        ></TextInput>
+        <TextInput
+          style={cajatextoData}
+          value={data.correo}
+          onChangeText={(text) => setData((old) => ({ ...old, correo: text }))}
+          placeholder="Correo"
+        ></TextInput>
+        <TextInput
+          style={cajatextoData}
+          value={data.password}
+          onChangeText={(text) =>
+            setData((old) => ({ ...old, password: text }))
+          }
+          placeholder="Password"
+        ></TextInput>
+        <TextInput
+          style={cajatextoData}
+          value={data.confirmacion}
+          onChangeText={(text) =>
+            setData((old) => ({ ...old, confirmacion: text }))
+          }
+          placeholder="Confirmar Password"
         ></TextInput>
 
         <TouchableOpacity
-          onPress={() => redireccionar("client/home")}
+          onPress={() => requesData()}
           style={comunButton.boton}
         >
           <View style={titulodarkdata}>
-            <Text style={{ color: "#fff" }}> Iniciar</Text>
+            <Text style={{ color: "#fff" }}> Registrar</Text>
             <FontAwesome
               name="sign-in"
               size={22}
