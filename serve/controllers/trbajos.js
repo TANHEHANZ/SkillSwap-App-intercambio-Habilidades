@@ -17,6 +17,23 @@ app.get("/trabajos", async (req, res) => {
   });
   res.json(trabajos);
 });
+app.get("/trabajosSolicitud/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const trabajos = await prisama.trabajos.findMany({
+    where: {
+      usuarioId: id,
+    },
+    include: {
+      Solicitud: {
+        include: {
+          solicitudUser: true,
+        },
+      },
+    },
+  });
+  res.json(trabajos);
+});
 
 app.get("/trabajos/:id", async (req, res) => {
   const id = parseInt(req.params.id);
