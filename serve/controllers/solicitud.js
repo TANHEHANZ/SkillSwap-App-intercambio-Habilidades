@@ -4,13 +4,25 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.get("/solicitud", async (req, res) => {
-  const soli = await prisma.solicitud.findMany({});
+  const soli = await prisma.solicitud.findMany({
+    include: {
+      TrabajoSolicitado: {
+        include: {
+          usuerTabajo: true,
+        },
+      },
+    },
+  });
   res.json(soli);
 });
 app.get("/solicitud/:id", async (req, res) => {
   id = parseInt(req.params.id);
   const soli = await prisma.solicitud.findMany({
     where: { userId: id },
+    include: {
+      solicitudUser: true,
+      TrabajoSolicitado: true,
+    },
   });
   res.json(soli);
 });

@@ -19,12 +19,14 @@ model Usuario {
 }
 
 model Solicitud {
-  id            Int      @id @default(autoincrement())
-  userId        Int
-  solicitudUser Usuario  @relation(fields: [userId], references: [id])
-  fecha         DateTime
-  detalles      String
-  comentarios   String?
+  id                Int      @id @default(autoincrement())
+  userId            Int
+  solicitudUser     Usuario  @relation(fields: [userId], references: [id])
+  trabajoId         Int
+  TrabajoSolicitado Trabajos @relation(fields: [trabajoId], references: [id])
+  fecha             DateTime
+  detalles          String
+  comentarios       String?
 }
 
 model Trabajos {
@@ -36,6 +38,7 @@ model Trabajos {
   usuarioId   Int
   usuerTabajo Usuario       @relation(fields: [usuarioId], references: [id])
   Comentarios Comentarios[]
+  Solicitud   Solicitud[]
 }
 
 model Comentarios {
