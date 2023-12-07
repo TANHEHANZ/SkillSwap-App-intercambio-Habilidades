@@ -19,7 +19,7 @@ const Layout = () => {
           gap: 100,
         }}
       >
-        <Text style={{ color: "#fff" }}>Layaut</Text>
+        <Text style={{ color: "#fff" }}>Todos los trabajos</Text>
         <TouchableOpacity onPress={() => router.replace("login")}>
           <Text style={{ color: "#fff" }}>volver</Text>
         </TouchableOpacity>

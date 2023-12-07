@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity, Linking } from "react-native";
 import React, { useEffect, useState } from "react";
 import { peticiongetdelete } from "../../services/getRequest";
 import { fondo } from "../../style/loginStyle";
@@ -52,7 +52,7 @@ const Home = () => {
                   <Text style={{ width: 200 }}>{item.descripcion}</Text>
                 </View>
                 <TouchableOpacity
-                  onPress={() => Linking.openURL(item.recurso)}
+                  onPress={() => Linking   .openURL(item.recurso)}
                   style={{
                     ...fondo.cajatexto,
                     width: 100,

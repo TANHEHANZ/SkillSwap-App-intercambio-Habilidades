@@ -26,7 +26,7 @@ const HomeLayautDash = () => {
               borderRadius: 10,
             }}
           >
-            volver
+            Salir app
           </Text>
         </TouchableOpacity>
       </View>

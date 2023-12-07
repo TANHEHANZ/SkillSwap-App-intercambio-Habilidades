@@ -1,15 +1,19 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { trabajos } from "../../style/dashStyle";
 import useUserStore from "../../context/userContext";
 import { peticiongetdelete } from "../../services/getRequest";
-
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { router } from "expo-router";
+import DatosTrabajos from "./datosTrabajos";
+import useDatosTrabajosStore from "../../context/trabajoContext";
 const Index = () => {
   const [data, setData] = useState("");
   const [dataTodo, setDataTodo] = useState("");
   const user = useUserStore((state) => state.user);
-  console.log(user);
+  const { guardarDatosTrabajos } = useDatosTrabajosStore();
+
   const userData = user.id;
   const fetchData = async () => {
     try {
@@ -19,6 +23,7 @@ const Index = () => {
       console.error("Error al obtener datos:", error);
     }
   };
+
   const fetchDataTodo = async () => {
     try {
       const result = await peticiongetdelete(`trabajos`);
@@ -27,7 +32,7 @@ const Index = () => {
       console.error("Error al obtener datos:", error);
     }
   };
-  console.log(dataTodo);
+
   useEffect(() => {
     fetchData();
     fetchDataTodo();
@@ -40,7 +45,6 @@ const Index = () => {
       <Text style={{ fontSize: 14, padding: 10, fontWeight: 900 }}>
         Mis trabajos
       </Text>
-
       <ScrollView
         horizontal
         style={{ height: 300, backgroundColor: "#060b4b86" }}
@@ -55,22 +59,44 @@ const Index = () => {
         ))}
       </ScrollView>
       <Text style={{ fontSize: 14, padding: 10, fontWeight: 900 }}>
-        Trabajos Publicos
+        Trabajos publicos generales
       </Text>
       <ScrollView
         horizontal
         style={{ height: 300, backgroundColor: "#060b4b86" }}
       >
-        {Object.entries(dataTodo).map(([key, value], index) => (
-          <View style={{ ...trabajos.cars, marginHorizontal: 20 }} key={index}>
-            <Image
-              source={{ uri: value.imagen }}
-              style={{ width: "50%", height: "50%" }}
-            />
+        {Object.entries(dataTodo).map(([key, value], index) =>
+          value.estado == "true" ? (
+            <View
+              style={{ ...trabajos.cars, marginHorizontal: 20 }}
+              key={index}
+            >
+              <Image
+                source={{ uri: value.imagen }}
+                style={{ width: "50%", height: "50%" }}
+              />
 
-            <Text>Comentarios</Text>
-          </View>
-        ))}
+              <Text style={{ paddingHorizontal: 15 }}>{value.descripcion}</Text>
+              <TouchableOpacity
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  gap: 10,
+                }}
+                onPress={() => (
+                  guardarDatosTrabajos(value),
+                  router.push("/admini/datosTrabajos")
+                )}
+              >
+                <Text style={{ color: "#fff" }}>Mas info +</Text>
+                <FontAwesome name="arrow-right" size={22} color="#fff" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            ""
+          )
+        )}
       </ScrollView>
     </View>
   );

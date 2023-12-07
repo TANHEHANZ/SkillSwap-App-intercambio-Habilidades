@@ -90,6 +90,7 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
         flexDirection: "column",
         gap: 20,
         height: 320,
+        padding:20,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: colors.secundary300,
@@ -121,7 +122,7 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
       ></TextInput>
       <View
         style={{
-          width: "12%",
+          width: "13%",
           backgroundColor: colors.secundary100,
           color: "#fff",
           flexDirection: "column",
@@ -130,6 +131,7 @@ const FormTrabajos = ({ fetchData, setEdiatando, ediatando }) => {
           alignSelf: "flex-start",
           position: "absolute",
           top:0,
+          borderBottomEndRadius:10,
         }}
       >
         <Text style={{ color: "#fff" }}>Visible</Text>

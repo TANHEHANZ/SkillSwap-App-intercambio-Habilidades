@@ -6,8 +6,9 @@ export const colors = {
   secundary: "rgb(6, 64, 150)",
   secundary100: "rgb(0, 6, 92)",
   secundary200: "rgb(15, 11, 78)",
-  secundary300: "rgb(181, 181, 243)",
+  secundary300: "rgba(27, 27, 80, 0.377)",
   blue100: "#EBF1FD",
+  succes: "#079b76",
 };
 
 export const sharedStyles = StyleSheet.create({
